@@ -31,10 +31,14 @@ Uploaded files arrive as links. When two questions have the same text, the secon
 
 ## Credentials
 
-1. In WhatsForm, open any form, go to **Integrations → n8n** and click **Create API key**.
+1. In WhatsForm, open your form's **Settings → Integrations → n8n**, go to **Connect** and click **Create API key**.
 2. In n8n, create a **WhatsForm API** credential and paste the key. Leave the base URL as `https://app.whatsform.com`.
 
-The key gives access to every form in the workspace it was created in. Revoke it from **AI agents → Your connected apps** in WhatsForm. Revoking it also stops every workflow that uses it.
+Keep both permissions on: **Get new responses** runs the trigger, and **Read responses** lets an HTTP Request node list the form's responses at `GET /integration/n8n/forms/{formId}/responses` (`limit` up to 100, `since` as an ISO date, and `cursor` from `nextCursor` for the next page).
+
+Each key belongs to one form, so use one credential per form. Manage and delete keys under the form's **Settings → API keys**; deleting one stops the workflows that use it.
+
+Each key can make up to 60 requests a minute and 10,000 a day, and only works from a server, not from a web page.
 
 The n8n integration needs a WhatsForm plan that includes integrations.
 

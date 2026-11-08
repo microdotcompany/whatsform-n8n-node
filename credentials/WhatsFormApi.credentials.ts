@@ -23,7 +23,7 @@ export class WhatsFormApi implements ICredentialType {
 			typeOptions: { password: true },
 			default: '',
 			required: true,
-			description: 'Create one under Integrations → n8n in any WhatsForm form',
+			description: "Create one in WhatsForm under your form's Settings → Integrations → n8n",
 		},
 		{
 			displayName: 'Base URL',
