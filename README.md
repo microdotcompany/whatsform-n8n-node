@@ -12,7 +12,7 @@ Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes
 
 ## Operations
 
-**WhatsForm Trigger** starts a workflow each time the chosen form gets a new response. Each answer arrives keyed by its question text, along with details about the response:
+**WhatsForm Trigger** starts a workflow each time the form your API key belongs to gets a new response. Each answer arrives keyed by its question text, along with details about the response:
 
 ```json
 {

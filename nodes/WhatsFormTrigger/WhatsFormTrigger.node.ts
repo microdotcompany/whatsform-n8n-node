@@ -4,8 +4,6 @@ import {
 	type IDataObject,
 	type IHookFunctions,
 	type IHttpRequestMethods,
-	type ILoadOptionsFunctions,
-	type INodePropertyOptions,
 	type INodeType,
 	type INodeTypeDescription,
 	type IWebhookFunctions,
@@ -14,7 +12,7 @@ import {
 } from 'n8n-workflow';
 
 async function whatsFormRequest(
-	this: IHookFunctions | ILoadOptionsFunctions,
+	this: IHookFunctions,
 	method: IHttpRequestMethods,
 	path: string,
 	{ body, allowNotFound = false }: { body?: IDataObject; allowNotFound?: boolean } = {},
@@ -74,30 +72,12 @@ export class WhatsFormTrigger implements INodeType {
 		],
 		properties: [
 			{
-				displayName: 'Form Name or ID',
-				name: 'formId',
-				type: 'options',
-				typeOptions: {
-					loadOptionsMethod: 'getForms',
-				},
-				required: true,
+				displayName: 'Starts with each new response to the form your API key was created for',
+				name: 'notice',
+				type: 'notice',
 				default: '',
-				description:
-					'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
 			},
 		],
-	};
-
-	methods = {
-		loadOptions: {
-			async getForms(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
-				const forms = (await whatsFormRequest.call(this, 'GET', '/forms')) as Array<{
-					id: string;
-					name: string;
-				}>;
-				return forms.map((form) => ({ name: form.name || form.id, value: form.id }));
-			},
-		},
 	};
 
 	webhookMethods = {
@@ -110,14 +90,7 @@ export class WhatsFormTrigger implements INodeType {
 				const hook = (await whatsFormRequest.call(this, 'GET', path, {
 					allowNotFound: true,
 				})) as IDataObject | null;
-				if (
-					hook &&
-					hook.hookUrl === this.getNodeWebhookUrl('default') &&
-					hook.formId === this.getNodeParameter('formId')
-				) {
-					return true;
-				}
-				// the form was changed since the hook was created
+				if (hook && hook.hookUrl === this.getNodeWebhookUrl('default')) return true;
 				if (hook) await whatsFormRequest.call(this, 'DELETE', path, { allowNotFound: true });
 				delete webhookData.hookId;
 				return false;
@@ -125,9 +98,12 @@ export class WhatsFormTrigger implements INodeType {
 
 			async create(this: IHookFunctions): Promise<boolean> {
 				const webhookData = this.getWorkflowStaticData('node');
+				const { form } = (await whatsFormRequest.call(this, 'GET', '/me')) as {
+					form: { id: string };
+				};
 				const { id } = (await whatsFormRequest.call(this, 'POST', '/hooks', {
 					body: {
-						formId: this.getNodeParameter('formId') as string,
+						formId: form.id,
 						hookUrl: this.getNodeWebhookUrl('default') as string,
 					},
 				})) as { id: string };
