@@ -11,7 +11,7 @@ export class WhatsFormApi implements ICredentialType {
 
 	displayName = 'WhatsForm API';
 
-	icon: Icon = 'file:../icons/whatsform.png';
+	icon: Icon = 'file:../icons/whatsform.svg';
 
 	documentationUrl = 'https://github.com/microdotcompany/whatsform-n8n-node#credentials';
 

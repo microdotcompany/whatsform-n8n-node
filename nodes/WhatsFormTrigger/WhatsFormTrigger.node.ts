@@ -48,7 +48,7 @@ export class WhatsFormTrigger implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'WhatsForm Trigger',
 		name: 'whatsFormTrigger',
-		icon: 'file:../../icons/whatsform.png',
+		icon: 'file:../../icons/whatsform.svg',
 		group: ['trigger'],
 		version: 1,
 		subtitle: 'New response',
