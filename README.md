@@ -1,4 +1,4 @@
-# n8n-nodes-whatsform
+# @micro.company/n8n-nodes-whatsform
 
 This is an n8n community node. It lets you start n8n workflows from [WhatsForm](https://whatsform.com) responses.
 
@@ -8,7 +8,7 @@ WhatsForm builds forms that send each response to WhatsApp, for orders, bookings
 
 ## Installation
 
-Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation and install `n8n-nodes-whatsform`.
+Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation and install `@micro.company/n8n-nodes-whatsform`.
 
 ## Operations
 
