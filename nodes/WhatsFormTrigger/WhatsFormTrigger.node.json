@@ -1,5 +1,5 @@
 {
-	"node": "@micro.company/n8n-nodes-whatsform.whatsFormTrigger",
+	"node": "n8n-nodes-whatsform.whatsFormTrigger",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
 	"categories": ["Communication", "Marketing & Content"],
