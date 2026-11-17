@@ -1,6 +1,6 @@
 {
-	"name": "n8n-nodes-whatsform",
-	"version": "0.1.0",
+	"name": "@micro.company/n8n-nodes-whatsform",
+	"version": "0.1.1",
 	"description": "Start n8n workflows from WhatsForm responses",
 	"license": "MIT",
 	"homepage": "https://whatsform.com",
